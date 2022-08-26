@@ -1,0 +1,123 @@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-- form data -->
+        <form class="form"  [formGroup]="myFormGroupName">
+          <div class="form-group">
+            <label for="userId"> User Id :</label>
+            <input type="text" id="userId" class="form-control " formControlName="userId" name="userId" 
+            [ngClass]="{ 'is-invalid': submitted && myFormControls['userId'].errors }" placeholder="Enter user id" required>
+            <div *ngIf="submitted && myFormControls['userId'].errors" class="invalid-feedback">
+              <div *ngIf="myFormControls['userId'].errors['required']">user id is required</div>
+              <div *ngIf="myFormControls['userId'].errors?.['maxlength']">user id not more than 3 digits</div>
+          </div>
+          </div><br>
+          <div class="form-group">
+            <label for="title"> Title :</label>
+            <input type="text" id="title" class="form-control" formControlName="title" 
+            [ngClass]="{ 'is-invalid': submitted && myFormControls['title'].errors }" placeholder="Enter title" required>
+            <div *ngIf="submitted && myFormControls['title'].errors" class="invalid-feedback">
+              <div *ngIf="myFormControls['title'].errors['required']">title is required</div>
+              <div *ngIf="myFormControls['title'].errors['minlength']">title must be at least 10 characters</div>
+          </div>
+          </div><br>
+          <div class="form-group">
+            <label for="completed"> status:</label>
+            <select class="form-control float-right" formControlName="completed"
+            [ngClass]="{ 'is-invalid': submitted && myFormControls['completed'].errors }" id="completed" required>
+              <option value="" selected disabled hidden>check</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+            <div *ngIf="submitted && myFormControls['completed'].errors" class="invalid-feedback">
+              <div *ngIf="myFormControls['completed'].errors?.['required']">status is required</div>
+              
+          </div>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary mt-4" (click)="submit()">Submit</button> -->
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="createUser()">Add User</button>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- primengTable -->
+<p-table [value]="posts" styleClass="p-datatable-striped" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50,200]">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>UserId</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-post>
+  
+    <tr>
+    <td>{{post.id}}</td>
+      <td>{{post.userId}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.completed}}</td>
+      <td> 
+        <button type="button" (click)="deleteUser(post.id)" class="btn btn-outline-warning"><i class="pi pi-trash"></i></button>
+        <button type="button" (click)="updateUser(post.id)" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary ml-2"><i class="pi pi-user-edit"></i></button>  
+        <button type="button" class="btn btn-default btn-lg"><i class="icon-trash"></i></button> 
+        </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- form data -->
+        <form class="form" [formGroup]="myFormGroupName">
+          <div class="form-group">
+            <label for="userId"> Userid :</label>
+            <input type="number" id="userId" class="form-control" formControlName="userId" placeholder="Enter user id">
+          </div><br>
+          <div class="form-group">
+            <label for="title"> Title :</label>
+            <input type="text" id="title" class="form-control" formControlName="title" placeholder="Enter title">
+          </div><br>
+          <div class="form-group">
+            <label for="completed"> status :</label>
+            <!-- <input type="button" class="btn  dropdown-toggle"  id="title" formControlName="title" placeholder="Enter completed status" > -->
+            <select formControlName="completed" class="form-control float-right" id="completed">
+              <option value="" selected disabled hidden>check</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary mt-4" (click)="submit()">Submit</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="updateUserDetails()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

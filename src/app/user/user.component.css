@@ -1,0 +1,25 @@
+form{
+    margin: 2% 20% ;
+}input{
+    /* margin-right:50px; */
+    width: 70%;
+    float: right;
+    /* margin-bottom: 20px; */
+}
+select{
+    width: 70%;
+    /* margin-left: 20px; */
+}
+
+th,td{
+    text-align: center;
+
+}
+span{
+    margin-left: 100px;
+}
+.invalid-feedback{
+    float: left;
+    margin-left: 30%;
+    margin-bottom: 10px;
+}
