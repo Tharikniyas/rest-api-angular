@@ -45,18 +45,12 @@ export class UserComponent implements OnInit {
   }
   }
   deleteUser(id: number) {
-    for (var i = 0; i < this.posts.length; i++) {
-      if (this.posts[i].id == id) {
-        this.posts.splice(i, 1);
-        break;
-      }
+    var index = this.posts.findIndex((e: any) => e.id == id)
+    if (index > -1) {
+      this.posts.splice(index, 1);
     }
-      // this.posts.findIndex((e: any) => e.id == id)
-      // console.log(index);
-    // this.posts = this.posts.filter((posts: any) => posts.id !== id);
     this.userService.deleteUser(id).subscribe(data => {
       alert("User Deleted Successfuly!!")
-      // console.log(data);
     })
   }
   updateUser(id: any) {
@@ -71,8 +65,7 @@ export class UserComponent implements OnInit {
     })
     this.userService.readUserDetails(id).subscribe((res: any) => {
       console.log(res);
-      // this.myFormGroupName = res;// ERROR TypeError: this.form.get is not a function
-    });
+     });
   }
   updateUserDetails() {
     this.userService.updateUser(this.myFormGroupName.value, this.primaryId).subscribe(data => {
@@ -83,57 +76,5 @@ export class UserComponent implements OnInit {
   get myFormControls () {
     return this.myFormGroupName.controls;
   }
-  get userId() {
-    // console.log(this.myFormGroupName.get('userId'));
-    
-    return this.myFormGroupName.get('userId')!;
-} 
-
 }
 
-
-
-
-
-
-
-
-
-    // this.id=id
-    // console.log(this.posts[id]);
-    // let post = this.posts[id];
-    // this.myFormGroupName.patchValue({
-    //   userid: post.userId,
-    //   title: post.title,
-    //   completed: post.completed
-    // this.updateUserDetails();
-  // updateUserDetails(value:any){
-  //   this.userService.updateUser().subscribe(data=>{
-  //    alert("Updated successs")
-  //   })
-
-
-    
-
-    // this.userService.readUserDetails(id).subscribe((res: any) => {
-    //   console.log(res);
-    //   this.myFormGroupName=res;
-    //   this.myFormGroupName.patchValue(
-      // {userid:res.userId,
-      // title:res.title,
-      // completed:res.completed})
-
-
-    //  this.updateUserDetails(this.value);
-      // this.forms.controls["userid"].setValue(res.userId);
-      // this.forms.controls["title"].setValue(res.title)
-  // this.forms.controls["completed"].setValue(res.completed)
-    // })
-  
-// }
-
-
-// this.userService.updateUser(id,value).subscribe(data=>{
-//   console.log(data);
-//   alert("User updated successfully!")
-// })
