@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
   value: any;
   primaryId: any={};
   submitted = false;
-  validStrings = /\-?\d*\.?\d{1,2}/;
+  validStrings = /^-?(0|[1-9]\d*)?$/;
   constructor(
     private userService: UserService,
     private fb: FormBuilder) { }
@@ -45,12 +45,15 @@ export class UserComponent implements OnInit {
     alert("Fill the all Elements")
   }
   }
-  deleteUser(id: number) {
-    for (var j in this.posts) {
-      if (this.posts[j].id == id) {
-        this.posts.splice(j, 1)
-      }
-    }
+  deleteUser(id: number,i:any) {
+    console.log(i);
+    this.posts.splice(i,1)
+    
+    // for (var j in this.posts) {
+    //   if (this.posts[j].id == id) {
+    //     this.posts.splice(j, 1)
+    //   }
+    // }
     // var index = this.posts.findIndex((e: any) => e.id == id)
     // if (index > -1) {
     //   this.posts.splice(index, 1);

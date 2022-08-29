@@ -65,7 +65,7 @@
       <th>Action</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-post>
+  <ng-template pTemplate="body" let-post let-i="rowIndex">
   
     <tr>
     <td>{{post.id}}</td>
@@ -73,7 +73,7 @@
       <td>{{post.title}}</td>
       <td>{{post.completed}}</td>
       <td> 
-        <button type="button" (click)="deleteUser(post.id)" class="btn btn-outline-warning"><i class="pi pi-trash"></i></button>
+        <button type="button" (click)="deleteUser(post.id,i)" class="btn btn-outline-warning"><i class="pi pi-trash"></i></button>
         <button type="button" (click)="updateUser(post.id)" data-toggle="modal" data-target="#updateModal" class="btn btn-outline-primary ml-2"><i class="pi pi-user-edit"></i></button>  
         <button type="button" class="btn btn-default btn-lg"><i class="icon-trash"></i></button> 
         </td>
