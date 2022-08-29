@@ -45,10 +45,15 @@ export class UserComponent implements OnInit {
   }
   }
   deleteUser(id: number) {
-    var index = this.posts.findIndex((e: any) => e.id == id)
-    if (index > -1) {
-      this.posts.splice(index, 1);
+    for (var j in this.posts) {
+      if (this.posts[j].id == id) {
+        this.posts.splice(j, 1)
+      }
     }
+    // var index = this.posts.findIndex((e: any) => e.id == id)
+    // if (index > -1) {
+    //   this.posts.splice(index, 1);
+    // }
     this.userService.deleteUser(id).subscribe(data => {
       alert("User Deleted Successfuly!!")
     })
