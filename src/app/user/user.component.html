@@ -20,6 +20,7 @@
             <div *ngIf="submitted && myFormControls['userId'].errors" class="invalid-feedback">
               <div *ngIf="myFormControls['userId'].errors['required']">user id is required</div>
               <div *ngIf="myFormControls['userId'].errors?.['maxlength']">user id not more than 3 digits</div>
+              <div *ngIf="myFormControls['userId'].errors?.['pattern']">Only Numbers are allowed</div>
           </div>
           </div><br>
           <div class="form-group">

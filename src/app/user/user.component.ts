@@ -14,13 +14,14 @@ export class UserComponent implements OnInit {
   value: any;
   primaryId: any={};
   submitted = false;
+  validStrings = /\-?\d*\.?\d{1,2}/;
   constructor(
     private userService: UserService,
     private fb: FormBuilder) { }
   ngOnInit(): void {
     this.getUser();
     this.myFormGroupName = this.fb.group({
-      userId: ["",[Validators.required,Validators.maxLength(3)]],
+      userId: ["",[Validators.required,Validators.maxLength(3),Validators.pattern(this.validStrings)]],
       title: ["",[Validators.required,Validators.minLength(10),]],
       completed: ['', Validators.required]
     })
